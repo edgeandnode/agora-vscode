@@ -1,0 +1,145 @@
+{
+	"name": "Agora cost modelling language",
+	"scopeName": "source.agora",
+	"patterns": [
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#statement"
+		}
+	],
+	"foobar": {
+		"expression": {
+			"patterns": [
+				{
+					"begin": "\\(",
+					"end": "\\)",
+					"patterns": [
+						{
+							"include": "#expression"
+						}
+					]
+				},
+				{
+					"include": "#number"
+				},
+				{
+					"include": "#substitution"
+				},
+				{
+					"include": "#boolean-literal"
+				},
+				{
+					"include": "#arithmetic-operator"
+				}
+			]
+		}
+	},
+	"repository": {
+		"comment": {
+			"name": "comment.line.number-sign.agora",
+			"captures": {
+				"1": {
+					"name": "punctuation.definition.comment.agora"
+				}
+			},
+			"match": "(#).*$\\n?"
+		},
+		"number": {
+			"name": "constant.numeric.agora",
+			"match": "[\\-\\+]?[0-9]+(\\.[0-9]+)?"
+		},
+		"semicolon": {
+			"name": "punctuation.separator.statement.agora",
+			"match": ";"
+		},
+		"when": {
+			"name": "keyword.when.agora",
+			"match": "\\bwhen\\b"
+		},
+		"default": {
+			"name": "keyword.default.agora",
+			"match": "\\bdefault\\b"
+		},
+		"arrow": {
+			"name": "punctuation.separator.arrow.agora",
+			"match": "=>"
+		},
+		"query": {
+			"name": "keyword.query.agora",
+			"match": "\\bquery\\b"
+		},
+		"query-contents": {
+			"begin": "\\{",
+			"end": "\\}",
+			"name": "string.triple.agora",
+			"patterns": [
+				{
+					"name": "meta.embedded.graphql",
+					"include": "source.graphql"
+				}
+			]
+		},
+		"boolean-literal": {
+			"name": "constant.language.agora",
+			"match": "\\b(?:true|false)\\b"
+		},
+		"substitution": {
+			"name": "variable.other.substitution.agora",
+			"match": "\\$[_a-zA-Z][_a-zA-Z0-9]+\\b"
+		},
+		"logic-operator": {
+			"name": "keyword.operator.logical.agora",
+			"match": "(&&|\\|\\|)"
+		},
+		"comparison-operator": {
+			"name": "keyword.operator.comparison.agora",
+			"match": "(==|!=|<=|>=|>|<)"
+		},
+		"arithmetic-operator": {
+			"name": "keyword.operator.math.agora",
+			"match": "(\\+|-|/|\\*)"
+		},
+		"statement": {
+			"patterns": [
+				{
+					"include": "#arrow"
+				},
+				{
+					"include": "#when"
+				},
+				{
+					"include": "#default"
+				},
+				{
+					"include": "#semicolon"
+				},
+				{
+					"include": "#query"
+				},
+				{
+					"include": "#query-contents"
+				},
+				{
+					"include": "#number"
+				},
+				{
+					"include": "#boolean-literal"
+				},
+				{
+					"include": "#substitution"
+				},
+				{
+					"include": "#logic-operator"
+				},
+				{
+					"include": "#comparison-operator"
+				},
+				{
+					"include": "#arithmetic-operator"
+				}
+			]
+		}
+	}
+}

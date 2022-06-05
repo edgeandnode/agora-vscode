@@ -1,0 +1,73 @@
+{
+    "name": "agora-support",
+    "displayName": "Agora support",
+    "description": "Support for the Agora cost modelling language",
+    "license": "MIT",
+    "version": "1.0.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/graphprotocol/agora-vscode"
+    },
+    "keywords": [
+        "multi-root ready"
+    ],
+    "engines": {
+        "vscode": "^1.67.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "activationEvents": [
+        "onLanguage:agora",
+        "onCommand:agora.compile"
+    ],
+    "main": "./lsp-client/out/extension.js",
+    "contributes": {
+        "languages": [
+            {
+                "id": "agora",
+                "icon": {
+                    "dark": "./icons/thegraph.svg",
+                    "light": "./icons/thegraph.svg"
+                },
+                "aliases": [
+                    "Agora",
+                    "agora"
+                ],
+                "extensions": [
+                    ".agora"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "agora",
+                "scopeName": "source.agora",
+                "path": "./syntaxes/agora.tmLanguage.json"
+            }
+        ],
+        "commands": [
+            {
+                "command": "agora.compile",
+                "title": "Agora: Compile this cost model"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -b",
+        "watch": "tsc -b -w",
+        "lint": "eslint ./lsp-client/src ./lsp-server/src --ext .ts,.tsx",
+        "postinstall": "cd lsp-client && npm install && cd ../lsp-server && npm install && cd .."
+    },
+    "devDependencies": {
+        "@types/mocha": "^9.1.0",
+        "@types/node": "^16.11.7",
+        "@typescript-eslint/eslint-plugin": "^5.19.0",
+        "@typescript-eslint/parser": "^5.19.0",
+        "eslint": "^8.13.0",
+        "mocha": "^9.2.1",
+        "typescript": "^4.7.2"
+    }
+}
